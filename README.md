@@ -1,4 +1,4 @@
-# Cabby Threejs Proejct
+# Cabby Threejs Project
 <h4>by Syed Anas Tanweer</h4>
 
 <p align="center">
