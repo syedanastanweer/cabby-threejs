@@ -60,10 +60,13 @@ async function setupViewer() {
   });
 
   viewer.renderer.refreshPipeline();
-  const model = await manager.addFromPath("./assets/cabby-car.glb");
+  const model = await manager.addFromPath("./assets/scene (5).glb");
   const object3d = model[0].modelObject;
   const modelPosition = object3d.position;
   const modelRotation = object3d.rotation;
+  const modelScale = object3d.scale; // Add scale to control the model size
+
+modelScale.set(1, 1, 1); // Scale down the model to 50% of its original size
 
   const loaderElement = document.querySelector(".loader");
 
