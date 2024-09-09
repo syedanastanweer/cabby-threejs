@@ -112,7 +112,7 @@ async function setupViewer() {
           second: { x: -0.0, y: 0, z: -0.1 },
           third: { x: 0.5, y: -0.1, z: -0.9 },
           fourth: { x: -0.2, y: -0.25, z: 0.5 },
-          fifth: { x: -0.9, y: -0.1, z: 0.7 },
+          fifth: { x: -0.6, y: -0.1, z: 0.2 },
           sixth: { x: 0.9, y: -0.2, z: -0.4 }
         }
       : {
