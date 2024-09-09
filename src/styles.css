@@ -801,6 +801,9 @@ width: 50%
   opacity: 1;
 }
 
+.car-detail .text-div {
+  padding-left: 0px;
+}
 .section--six--container {
   display: flex;
   flex-direction: column;
