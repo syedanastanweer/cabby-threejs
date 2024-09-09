@@ -117,7 +117,7 @@ async function setupViewer() {
         }
       : {
           first: { x: -0.9, y: -0.43, z: 0 }, // Desktop positions
-          second: { x: 0.36, y: -0.02, z: -0.22 },
+          second: { x: -0.16, y: -0.02, z: -0.22 },
           third: { x: 1.38, y: -0.11, z: -1.06 },
           fourth: { x: -0.92, y: -0.31, z: 0.66 },
           fifth: { x: -1.1, y: -0.11, z: 0.99 },

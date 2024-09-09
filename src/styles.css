@@ -50,6 +50,125 @@ body {
   overflow: hidden;
 }
 
+.text-div1{
+  padding-left: 50px;
+}
+
+.ptb-15{
+   padding-top: 20px;
+   padding-bottom: 20px;
+}
+
+.detail1 {
+  color: #696969;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.193px;
+  width: 65%;
+}
+
+.text3 {
+  color: #000;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+
+
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  /* color: #212529; */
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  /* background-color: transparent; */
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  border-radius: .25rem;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+.btn-warning {
+  color: #000;
+  background-color: #FFBE0C;
+  border-color: #FFBE0C;
+  color: #FFF;
+  text-align: center;
+  /* font-family: Roboto; */
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 29.586px;
+  letter-spacing: 0.158px;
+  text-transform: uppercase;
+  padding: 13px 0px;
+  width: 33%;
+  border-radius: 10px;
+}
+
+.btn-warning1 {
+  color: #000;
+  background-color: #FFBE0C;
+  border-color: #FFBE0C;
+  color: #FFF;
+  text-align: center;
+  /* font-family: Roboto; */
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 29.586px;
+  letter-spacing: 0.158px;
+  text-transform: uppercase;
+  /* padding: 13px 0px; */
+  width: 100%;
+  border-radius: 10px;
+  padding: 20.391px 44.856px 18.608px 44.318px;
+}
+
+
+.text2{
+  color: #696969;
+
+font-size: 21px;
+font-style: normal;
+font-weight: 400;
+line-height: 40px;
+letter-spacing: 0.193px;
+}
+.text1{
+  color: #000;
+
+font-size: 32px;
+font-style: normal;
+font-weight: 700;
+line-height: 45px; /* 140.625% */
+letter-spacing: 0.193px;
+}
+
+.car-detail{
+  display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+.car-detail .text-div{
+  padding-left: 20px;
+}
+
 /* Car styling */
 .car {
   width: 50px;
@@ -252,19 +371,21 @@ main {
 .first h3 {
   color: var(--grey);
   position: absolute;
-  font-size: 9vw;
+  font-size: 150px;
+  line-height: 70px;
   white-space: nowrap;
   z-index: -1;
   text-transform: uppercase;
-  top: 50%;
+  top: 70%;
 }
 
 .section--one--container2 {
-  width: 70%;
-  margin-bottom: 6%;
+  width: 78%;
+  margin-bottom: 5%;
   display: flex;
   justify-content: space-between;
 }
+
 
 .spec--wrapper .name {
   color: #181A1F;
@@ -318,24 +439,26 @@ main {
 
 .second h1 {
   color: #0F1010;
-  text-align: center;
-  font-family: Montserrat;
-  font-size: 80px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: 100px;
-  /* 125% */
-  text-transform: uppercase;
+text-align: center;
+
+font-size: 70px;
+font-style: normal;
+font-weight: 800;
+line-height: 90px; /* 128.571% */
+text-transform: uppercase;
+/* writing-mode: vertical-rl;
+    text-orientation: upright; */
 }
 
 .section--two--container2 {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   margin-right: 8%;
   transition: all 0.5s ease-in-out;
   transform: translateX(450px);
   opacity: 0;
+  
 }
 
 .second span {
@@ -355,13 +478,12 @@ main {
 
 .second p {
   color: #181A1F;
-
-  font-size: 25px;
+  
+  font-size: 20px;
   font-style: normal;
   font-weight: 400;
-  line-height: 26px;
-  /* 104% */
-  letter-spacing: 7.5px;
+  line-height: 225px; /* 130% */
+  /* letter-spacing: 1px; */
   text-transform: uppercase;
 }
 
@@ -417,20 +539,21 @@ main {
   position: relative;
 }
 
+
 .section--six--container {
-  display: flex;
-  flex-direction: column;
-  width: 30%;
-  margin-left: 10%;
-  transform: translateX(-1000px);
-  transition: all 0.5s ease-in-out;
-  opacity: 0;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin-left: 10%;
+    transform: translateX(-1000px);
+    transition: all 0.5s ease-in-out;
+    opacity: 0;
 }
 
 .title {
   color: #0F1010;
   font-family: Montserrat;
-  font-size: 80px;
+  font-size: 76px;
   font-style: normal;
   font-weight: 800;
   line-height: 75px;
@@ -522,6 +645,81 @@ footer>a {
 
 @media (min-width: 320px) and (max-width: 480px) {
 
+  .btn-warning1 {
+    color: #000;
+    background-color: #FFBE0C;
+    border-color: #FFBE0C;
+    color: #FFF;
+    text-align: center;
+    /* font-family: Roboto; */
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 13.586px;
+    letter-spacing: 0.158px;
+    text-transform: uppercase;
+    /* padding: 13px 0px; */
+    width: 100%;
+    border-radius: 10px;
+    padding: 13px 6px 13px 6px;
+}
+
+  .btn-warning {
+    color: #000;
+    background-color: #FFBE0C;
+    border-color: #FFBE0C;
+    color: #FFF;
+    text-align: center;
+    /* font-family: Roboto; */
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 29.586px;
+    letter-spacing: 0.158px;
+    text-transform: uppercase;
+    padding: 8px 0px;
+    width: 37%;
+    border-radius: 10px;
+  }
+
+  .text2 {
+    color: #696969;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0.193px;
+}
+
+.w-50{
+width: 50%
+};
+
+
+
+.text1 {
+  color: #000;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 33px;
+  letter-spacing: 0.193px;
+}
+
+.activeRightSpecific {
+  transform: rotateZ(-90deg) translateY(-80px);
+  opacity: 1;
+  transition: transform 0.5s ease-in-out, opacity 1s ease-in-out;
+}
+.text3 {
+  color: #000;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-transform: uppercase;
+}
 
   /* .section {
     width: 100vw;
@@ -564,14 +762,13 @@ footer>a {
 
 .second p {
   color: #0F1010;
-  font-size: 25px;
+  font-size: 13px;
   font-style: normal;
-  font-weight: 400;
-  line-height: 26px;
+  font-weight: 600;
+  line-height: 21px;
   letter-spacing: 7.5px;
   text-transform: uppercase;
 }
-
 .second span {
   writing-mode: vertical-rl;
   text-orientation: upright;
