@@ -24,13 +24,14 @@ async function setupViewer() {
   });
   viewer.renderer.displayCanvasScaling = Math.min(window.devicePixelRatio, 1);
 
-  // const data = {
-  //   position: { x: 0, y: 0, z: 0 },
-  //   rotation: { x: 0, y: 0, z: 0 },
-  // };
-
-  // const pane = new Pane();
-
+  window.onload = function() {
+    // Hide the loader after 3 seconds
+    setTimeout(function() {
+      document.querySelector('.loader').style.display = 'none';
+      document.querySelector('.website-content').style.display = 'block';
+    }, 3000); // 3 seconds
+  }
+  
   const manager = await viewer.addPlugin(AssetManagerPlugin);
   const camera = viewer.scene.activeCamera;
 
@@ -41,9 +42,6 @@ async function setupViewer() {
   await viewer.addPlugin(SSRPlugin);
   await viewer.addPlugin(SSAOPlugin);
   await viewer.addPlugin(BloomPlugin);
-
-  // or use this to add all main ones at once.
-  // await addBasePlugins(viewer);
 
   // WEBGi loader
   const importer = manager.importer;
@@ -64,9 +62,22 @@ async function setupViewer() {
   const object3d = model[0].modelObject;
   const modelPosition = object3d.position;
   const modelRotation = object3d.rotation;
-  const modelScale = object3d.scale; // Add scale to control the model size
+  const modelScale = object3d.scale;
 
-modelScale.set(1, 1, 1); // Scale down the model to 50% of its original size
+  // Function to adjust model scale based on screen width
+  function adjustModelScale() {
+    if (window.innerWidth <= 786) {
+      modelScale.set(0.5, 0.5, 0.5); // Scale to 0.2 for screen widths 786px or less
+    } else {
+      modelScale.set(1, 1, 1); // Reset to original scale if width is greater than 786px
+    }
+  }
+
+  // Initial scale adjustment
+  adjustModelScale();
+
+  // Adjust scale on window resize
+  window.addEventListener('resize', adjustModelScale);
 
   const loaderElement = document.querySelector(".loader");
 
@@ -86,30 +97,6 @@ modelScale.set(1, 1, 1); // Scale down the model to 50% of its original size
       });
   }
   
-
-  // pane.addInput(data, "position", {
-  //   x: { step: 0.01 },
-  //   y: { step: 0.01 },
-  //   z: { step: 0.01 },
-  // });
-  // pane.addInput(data, "rotation", {
-  //   x: { min: -6.28319, max: 6.28319, step: 0.001 },
-  //   y: { min: -6.28319, max: 6.28319, step: 0.001 },
-  //   z: { min: -6.28319, max: 6.28319, step: 0.001 },
-  // });
-
-  // pane.on("change", (e) => {
-  //   if (e.presetKey === "rotation") {
-  //     const { x, y, z } = e.value;
-  //     modelRotation.set(x, y, z);
-  //   } else {
-  //     const { x, y, z } = e.value;
-  //     modelPosition.set(x, y, z);
-  //   }
-
-  //   onUpdate();
-  // });
-
   function setupScrollanimation() {
     document.body.removeChild(loaderElement);
 
@@ -144,9 +131,21 @@ modelScale.set(1, 1, 1); // Scale down the model to 50% of its original size
       })
 
       .to(modelRotation, {
-        x: 0.0,
+        x: 1.57,
         y: 0,
-        z: -1.57,
+        z: 0,
+        scrollTrigger: {
+          trigger: ".second",
+          start: "top bottom",
+          end: "top top",
+          scrub: 0.2,
+          immediateRender: false,
+        },
+      })
+      .to(modelPosition, {
+        x: 0.2,
+        y: 0,
+        z: 0,
         scrollTrigger: {
           trigger: ".second",
           start: "top bottom",
@@ -171,7 +170,7 @@ modelScale.set(1, 1, 1); // Scale down the model to 50% of its original size
       })
 
       .to(modelRotation, {
-        x: 0.403,
+        x: 1.0,
         y: 0.957,
         z: -0.421,
         scrollTrigger: {
@@ -184,7 +183,7 @@ modelScale.set(1, 1, 1); // Scale down the model to 50% of its original size
       })
 
       .to(modelPosition, {
-        x: -1.92,
+        x: -0.92,
         y: -0.31,
         z: 0.66,
         scrollTrigger: {
@@ -226,6 +225,18 @@ modelScale.set(1, 1, 1); // Scale down the model to 50% of its original size
         x: -0.785,
         y: 2.329,
         z: 0.903,
+        scrollTrigger: {
+          trigger: ".five",
+          start: "top bottom",
+          end: "top top",
+          scrub: 0.2,
+          immediateRender: false,
+        },
+      })
+      .to(modelScale, {    // Add scale adjustment
+        x: 0.8,            // Reduce size along x-axis (80% of original size)
+        y: 0.8,            // Reduce size along y-axis
+        z: 0.8,            // Reduce size along z-axis
         scrollTrigger: {
           trigger: ".five",
           start: "top bottom",
@@ -345,14 +356,6 @@ modelScale.set(1, 1, 1); // Scale down the model to 50% of its original size
     viewer.renderer.resetShadows();
     viewer.setDirty();
   }
-
-  // viewer.addEventListener("preFrame", () => {
-  //   if (needsUpdate) {
-  //     camera.positionUpdated(true);
-  //     camera.targetUpdated(true);
-  //     needsUpdate = false;
-  //   }
-  // });
 
   // SCROLL TO TOP
   document.querySelectorAll(".button--footer")?.forEach((item) => {
