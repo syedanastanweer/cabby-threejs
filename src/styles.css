@@ -175,8 +175,8 @@ body {
   display: flex;
   align-content: center;
   width: 100%;
-  justify-content: center;
-  font-family: "Orbitron", sans-serif;
+  justify-content: flex-start;
+  /* font-family: "Orbitron", sans-serif; */
   margin-bottom: 1%;
   margin-top: 20px;
   font-size: 3vw;
@@ -546,8 +546,8 @@ footer>a {
     margin-bottom: 6%;
     display: flex;
     justify-content: space-between;
-  }
-
+    display: none;
+}
   .spec--wrapper .name {
     color: #181A1F;
     font-family: Montserrat;

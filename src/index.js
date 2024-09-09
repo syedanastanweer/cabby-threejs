@@ -67,7 +67,9 @@ async function setupViewer() {
   // Function to adjust model scale based on screen width
   function adjustModelScale() {
     if (window.innerWidth <= 786) {
-      modelScale.set(0.5, 0.5, 0.5); // Scale to 0.2 for screen widths 786px or less
+      modelScale.set(0.5, 0.5, 0.5);
+      
+      // Scale to 0.2 for screen widths 786px or less
     } else {
       modelScale.set(1, 1, 1); // Reset to original scale if width is greater than 786px
     }
@@ -99,13 +101,34 @@ async function setupViewer() {
   
   function setupScrollanimation() {
     document.body.removeChild(loaderElement);
-
+  
+    const isMobile = window.innerWidth <= 768; // Check if it's a mobile screen
+  
     const tl = gsap.timeline();
-
+  
+    const positionConfig = isMobile
+      ? {
+          first: { x: -0.5, y: -0.3, z: 0.2 }, // Mobile positions
+          second: { x: -0.0, y: 0, z: -0.1 },
+          third: { x: 0.5, y: -0.1, z: -0.9 },
+          fourth: { x: -0.2, y: -0.25, z: 0.5 },
+          fifth: { x: -0.9, y: -0.1, z: 0.7 },
+          sixth: { x: 0.9, y: -0.2, z: -0.4 }
+        }
+      : {
+          first: { x: -0.9, y: -0.43, z: 0 }, // Desktop positions
+          second: { x: 0.36, y: -0.02, z: -0.22 },
+          third: { x: 1.38, y: -0.11, z: -1.06 },
+          fourth: { x: -0.92, y: -0.31, z: 0.66 },
+          fifth: { x: -1.1, y: -0.11, z: 0.99 },
+          sixth: { x: 1.16, y: -0.3, z: -0.56 }
+        };
+  
+    // Animation timeline based on screen size
     tl.to(modelPosition, {
-      x: -0.9,
-      y: -0.43,
-      z: 0,
+      x: positionConfig.first.x,
+      y: positionConfig.first.y,
+      z: positionConfig.first.z,
       scrollTrigger: {
         trigger: ".first",
         start: "top top",
@@ -115,11 +138,10 @@ async function setupViewer() {
       },
       onUpdate,
     })
-
       .to(modelPosition, {
-        x: -0.36,
-        y: -0.02,
-        z: -0.22,
+        x: positionConfig.second.x,
+        y: positionConfig.second.y,
+        z: positionConfig.second.z,
         scrollTrigger: {
           trigger: ".second",
           start: "top bottom",
@@ -129,7 +151,6 @@ async function setupViewer() {
         },
         onUpdate,
       })
-
       .to(modelRotation, {
         x: 1.57,
         y: 0,
@@ -143,22 +164,9 @@ async function setupViewer() {
         },
       })
       .to(modelPosition, {
-        x: 0.2,
-        y: 0,
-        z: 0,
-        scrollTrigger: {
-          trigger: ".second",
-          start: "top bottom",
-          end: "top top",
-          scrub: 0.2,
-          immediateRender: false,
-        },
-      })
-
-      .to(modelPosition, {
-        x: 1.38,
-        y: -0.11,
-        z: -1.06,
+        x: positionConfig.third.x,
+        y: positionConfig.third.y,
+        z: positionConfig.third.z,
         scrollTrigger: {
           trigger: ".third",
           start: "top bottom",
@@ -168,7 +176,6 @@ async function setupViewer() {
         },
         onUpdate,
       })
-
       .to(modelRotation, {
         x: 1.0,
         y: 0.957,
@@ -181,11 +188,10 @@ async function setupViewer() {
           immediateRender: false,
         },
       })
-
       .to(modelPosition, {
-        x: -0.92,
-        y: -0.31,
-        z: 0.66,
+        x: positionConfig.fourth.x,
+        y: positionConfig.fourth.y,
+        z: positionConfig.fourth.z,
         scrollTrigger: {
           trigger: ".four",
           start: "top bottom",
@@ -195,7 +201,6 @@ async function setupViewer() {
         },
         onUpdate,
       })
-
       .to(modelRotation, {
         x: 0.0,
         y: 1.641,
@@ -209,9 +214,9 @@ async function setupViewer() {
         },
       })
       .to(modelPosition, {
-        x: -1.1,
-        y: -0.11,
-        z: 0.99,
+        x: positionConfig.fifth.x,
+        y: positionConfig.fifth.y,
+        z: positionConfig.fifth.z,
         scrollTrigger: {
           trigger: ".five",
           start: "top bottom",
@@ -233,10 +238,10 @@ async function setupViewer() {
           immediateRender: false,
         },
       })
-      .to(modelScale, {    // Add scale adjustment
-        x: 0.8,            // Reduce size along x-axis (80% of original size)
-        y: 0.8,            // Reduce size along y-axis
-        z: 0.8,            // Reduce size along z-axis
+      .to(modelScale, {
+        x: 0.8,
+        y: 0.8,
+        z: 0.8,
         scrollTrigger: {
           trigger: ".five",
           start: "top bottom",
@@ -245,11 +250,10 @@ async function setupViewer() {
           immediateRender: false,
         },
       })
-
       .to(modelPosition, {
-        x: 1.16,
-        y: -0.3,
-        z: -0.56,
+        x: positionConfig.sixth.x,
+        y: positionConfig.sixth.y,
+        z: positionConfig.sixth.z,
         scrollTrigger: {
           trigger: ".six",
           start: "top bottom",
@@ -259,7 +263,6 @@ async function setupViewer() {
         },
         onUpdate,
       })
-
       .to(modelRotation, {
         x: -0.261,
         y: 4.911,
@@ -271,84 +274,104 @@ async function setupViewer() {
           scrub: 0.2,
           immediateRender: false,
         },
-      })
-      .to(".section--one--container1", {
-        opacity: 0,
-        scrollTrigger: {
-          trigger: ".section--one--container1",
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-          immediateRender: false,
-        },
-      })
-
-      .to(".section--one--container2", {
-        opacity: 0,
-        scrollTrigger: {
-          trigger: ".second",
-          start: "top bottom",
-          end: "top center",
-          scrub: true,
-          immediateRender: false,
-        },
-      })
-      .to(".section--two--container1", {
-        scrollTrigger: {
-          trigger: ".section--two--container1",
-          start: "top 80%",
-          end: "bottom center",
-          toggleClass: "activeRightSpecific",
-          scrub: true,
-        },
-      })
-      .to(".section--two--container2", {
-        scrollTrigger: {
-          trigger: ".section--two--container2",
-          start: "top 80%",
-          end: "bottom center",
-          toggleClass: "resetPosition",
-          scrub: true,
-        },
-      })
-      .to(".section--three--container", {
-        scrollTrigger: {
-          trigger: ".section--three--container",
-          start: "top 80%",
-          end: "bottom center",
-          toggleClass: "resetPosition",
-          scrub: true,
-        },
-      })
-      .to(".section--four--container", {
-        scrollTrigger: {
-          trigger: ".section--four--container",
-          start: "top 80%",
-          end: "bottom center",
-          toggleClass: "resetPosition",
-          scrub: true,
-        },
-      })
-      .to(".section--five--container ", {
-        scrollTrigger: {
-          trigger: ".section--five--container ",
-          start: "top 80%",
-          end: "bottom center",
-          toggleClass: "resetPosition",
-          scrub: true,
-        },
-      })
-      .to(".section--six--container ", {
-        scrollTrigger: {
-          trigger: ".section--six--container ",
-          start: "top 80%",
-          end: "bottom center",
-          toggleClass: "resetPosition",
-          scrub: true,
-        },
       });
+  
+    // Ensure text is visible in all sections, including mobile
+    gsap.to(".section--six--container", {
+      opacity: 1, // Make sure it's visible
+      scrollTrigger: {
+        trigger: ".section--six--container",
+        start: "top 80%",
+        end: "bottom center",
+        scrub: true,
+        immediateRender: false,
+      },
+    });
+  
+    // Container animations for all sections
+    gsap.to(".section--one--container1", {
+      opacity: 1, // Ensure text visibility
+      scrollTrigger: {
+        trigger: ".section--one--container1",
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+        immediateRender: false,
+      },
+    });
+  
+    gsap.to(".section--one--container2", {
+      opacity: 1, // Ensure text visibility
+      scrollTrigger: {
+        trigger: ".second",
+        start: "top bottom",
+        end: "top center",
+        scrub: true,
+        immediateRender: false,
+      },
+    });
+  
+    gsap.to(".section--two--container1", {
+      scrollTrigger: {
+        trigger: ".section--two--container1",
+        start: "top 80%",
+        end: "bottom center",
+        toggleClass: "resetPosition", // Ensures the container resets its position properly
+        scrub: true,
+      },
+    });
+  
+    gsap.to(".section--two--container2", {
+      scrollTrigger: {
+        trigger: ".section--two--container2",
+        start: "top 80%",
+        end: "bottom center",
+        toggleClass: "resetPosition", // Ensures the container resets its position properly
+        scrub: true,
+      },
+    });
+  
+    gsap.to(".section--three--container", {
+      scrollTrigger: {
+        trigger: ".section--three--container",
+        start: "top 80%",
+        end: "bottom center",
+        toggleClass: "resetPosition", // Ensures the container resets its position properly
+        scrub: true,
+      },
+    });
+  
+    gsap.to(".section--four--container", {
+      scrollTrigger: {
+        trigger: ".section--four--container",
+        start: "top 80%",
+        end: "bottom center",
+        toggleClass: "resetPosition", // Ensures the container resets its position properly
+        scrub: true,
+      },
+    });
+  
+    gsap.to(".section--five--container", {
+      scrollTrigger: {
+        trigger: ".section--five--container",
+        start: "top 80%",
+        end: "bottom center",
+        toggleClass: "resetPosition", // Ensures the container resets its position properly
+        scrub: true,
+      },
+    });
+  
+    gsap.to(".section--six--container", {
+      scrollTrigger: {
+        trigger: ".section--six--container",
+        start: "top 80%",
+        end: "bottom center",
+        toggleClass: "resetPosition", // Ensures the container resets its position properly
+        scrub: true,
+      },
+    });
   }
-
+  
   // WEBGI UPDATE
   let needsUpdate = true;
   function onUpdate() {
